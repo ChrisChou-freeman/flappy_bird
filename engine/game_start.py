@@ -9,7 +9,7 @@ from .lib import listdir_clean, GameManager, Animation
 from . import settings
 
 class GameStart(GameManager):
-    def __init__(self, metadata: Dict[str, str]):
+    def __init__(self, metadata: Dict[str, str]) -> None:
         super().__init__(metadata)
         self.bird: str = random.choice(listdir_clean(settings.BIRD_IMG_PATHS))
         self.metadata['bird'] = self.bird
@@ -26,10 +26,10 @@ class GameStart(GameManager):
         self.bird_y_wave_frequency = 2
         self.counter = 0
 
-    def handle_input(self, key_event: event.Event):
+    def handle_input(self, key_event: event.Event) -> None:
         if key_event.type == pygame.KEYDOWN:
             if key_event.key == pygame.K_SPACE or key_event.key == pygame.K_UP:
-                pass
+                self.metadata['game_mode'] = 'game_play'
 
     def _bird_wave(self) -> None:
         self.counter += self.offset_value
@@ -40,6 +40,9 @@ class GameStart(GameManager):
             elif self.counter <= self.bird_y_wave_height * -1 * 2 and self.offset_value == -1:
                 self.offset_value = 1
 
+    def _ground_move(self) -> None:
+        pass
+
     def update(self, _) -> None:
         self._bird_wave()
         self.bird_animation.update()
@@ -49,3 +52,4 @@ class GameStart(GameManager):
         screen.blit(self.ground_image, self.ground_pos)
         screen.blit(self.start_image, self.start_pos)
         self.bird_animation.draw(screen)
+

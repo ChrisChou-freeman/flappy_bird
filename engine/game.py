@@ -6,10 +6,11 @@ from pygame import event, surface
 
 from . import settings
 from .game_start import GameStart
+from .game_play import GamePlay
 from .lib import GameManager
 
 class MainGame:
-    def __init__(self):
+    def __init__(self) -> None:
         pygame.init()
         pygame.mixer.init()
         self.screen = self._create_screen()
@@ -18,7 +19,8 @@ class MainGame:
             'game_mode': 'game_start'
         }
         self.game_mode = {
-            'game_start': GameStart
+            'game_start': GameStart,
+            'game_play': GamePlay
         }
         self.score = 0
         self.game_manager: Optional[GameManager] = None
@@ -30,8 +32,9 @@ class MainGame:
 
     def _handle_input(self, key_event: event.Event) -> None:
         if key_event.type == pygame.QUIT \
-                or (key_event.type == pygame.KEYDOWN and key_event.key == pygame.KSCAN_ESCAPE):
+                or (key_event.type == pygame.KEYDOWN and key_event.key == pygame.K_ESCAPE):
                 self._quit()
+                print('0')
         if self.game_manager is not None:
             self.game_manager.handle_input(key_event)
 
@@ -50,8 +53,7 @@ class MainGame:
 
     def run(self) -> None:
         clock = pygame.time.Clock()
-        is_game_running = True
-        while is_game_running:
+        while True:
             switch_mode = self.game_metadata['game_mode']
             if not isinstance(self.game_manager, self.game_mode[switch_mode]):
                 self.game_manager = self.game_mode[switch_mode](self.game_metadata)

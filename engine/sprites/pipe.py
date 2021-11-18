@@ -3,7 +3,7 @@ from typing import Dict
 
 from pygame import sprite, surface, mask, Vector2
 
-import settings
+from .. import settings
 
 class Pipe(sprite.Sprite):
     def __init__(self, image: surface.Surface, position: Vector2):

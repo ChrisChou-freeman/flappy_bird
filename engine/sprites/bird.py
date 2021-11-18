@@ -3,8 +3,6 @@ from typing import Dict, List
 
 from pygame import surface, sprite, mask, Vector2
 
-# from common_type import Vector2
-
 class Bird(sprite.Sprite):
     def __init__(self, images: Dict[str, surface.Surface], idx: int, position: Vector2):
         super().__init__()
@@ -20,10 +18,10 @@ class Bird(sprite.Sprite):
         self.bird_idx_cycle = itertools.cycle([0, 1, 2, 1])
         self.bird_idx_change_count = 0
 
-    def update(self, boundary_values: List[int], time_passed: int) -> bool:
+    def _update(self, boundary_values: List[int], time_passed: int) -> bool:
         if self.is_flapped:
             self.up_speed -= 60 * time_passed
-            if self.rect != None:
+            if self.rect is not None:
                 self.rect.top -= self.up_speed
             if self.up_speed <= 0:
                 self.unsetFlapped()
@@ -31,10 +29,10 @@ class Bird(sprite.Sprite):
                 self.down_speed = 0
         else:
             self.down_speed += 40 * time_passed
-            if self.rect != None:
+            if self.rect is not None:
                 self.rect.bottom += self.down_speed
         is_dead = False
-        if self.rect != None:
+        if self.rect is not None:
             if self.rect.bottom > boundary_values[1]:
                 is_dead = True
                 self.up_speed = 0
@@ -61,6 +59,6 @@ class Bird(sprite.Sprite):
         self.is_flapped = False
 
     def draw(self, screen: surface.Surface) -> None:
-        if self.image != None and self.rect != None:
+        if self.image is not None and self.rect is not None:
             screen.blit(self.image, self.rect)
 
