@@ -31,3 +31,6 @@ class GameManager(ABC):
     def draw(self, screen: surface.Surface) -> None:
         pass
 
+    @abstractmethod
+    def clear(self, screen: surface.Surface) -> None:
+        pass

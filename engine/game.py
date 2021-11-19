@@ -16,6 +16,7 @@ class MainGame:
         self.screen = self._create_screen()
         self.game_metadata = {
             'bird': '',
+            'day_night': '',
             'game_mode': 'game_start'
         }
         self.game_mode = {
@@ -56,6 +57,8 @@ class MainGame:
         while True:
             switch_mode = self.game_metadata['game_mode']
             if not isinstance(self.game_manager, self.game_mode[switch_mode]):
+                if self.game_manager is not None:
+                   self.game_manager.clear(self.screen)
                 self.game_manager = self.game_mode[switch_mode](self.game_metadata)
             for key_event in event.get():
                 self._handle_input(key_event)
