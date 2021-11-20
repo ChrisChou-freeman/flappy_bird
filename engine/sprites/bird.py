@@ -1,11 +1,11 @@
 from typing import Dict, List
 
-from pygame import sprite, mask, Vector2, surface
+from pygame import Vector2, surface
 
-from ..lib import SpriteAnimation
+from .sprite_animation import SpriteAnimation
 
 class Bird(SpriteAnimation):
-    def __init__(self, img: surface.Surface, metadata: Dict[str, str], position: Vector2):
+    def __init__(self, img: surface.Surface, metadata: Dict[str, str], position: Vector2) -> None:
         super().__init__(img, position, 34)
         self.metadata = metadata
         self.is_flapped = False

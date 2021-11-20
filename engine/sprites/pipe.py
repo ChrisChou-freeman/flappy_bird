@@ -6,7 +6,7 @@ from pygame import sprite, surface, mask, Vector2
 from .. import settings
 
 class Pipe(sprite.Sprite):
-    def __init__(self, image: surface.Surface, position: Vector2):
+    def __init__(self, image: surface.Surface, position: Vector2) -> None:
         super().__init__()
         self.image = image
         self.rect = self.image.get_rect()

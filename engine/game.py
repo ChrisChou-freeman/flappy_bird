@@ -1,5 +1,5 @@
 import sys
-from typing import Optional
+from typing import Optional, Type, Dict
 
 import pygame
 from pygame import event, surface
@@ -19,7 +19,7 @@ class MainGame:
             'day_night': '',
             'game_mode': 'game_start'
         }
-        self.game_mode = {
+        self.game_mode: Dict[str, Type[GameManager]] = {
             'game_start': GameStart,
             'game_play': GamePlay
         }
