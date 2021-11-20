@@ -19,13 +19,10 @@ class GamePlay(GameManager):
         self.bird_image = image.load(os.path.join(settings.BIRD_IMG_PATHS, self.metadata['bird']))
         self.pipe_image_bottom = image.load(settings.PIPE_IMG_PATH)
         self.pipe_image_up = pygame.transform.rotate(self.pipe_image_bottom, 180)
-        # load sound effect
-        self.die_sound = mixer.Sound(settings.DIE_AUDIO)
-        self.hit_sound = mixer.Sound(settings.HIT_AUDIO)
-        self.point_sound = mixer.Sound(settings.POINT_AUDIO)
-        self.swoosh_audio = mixer.Sound(settings.SWOOSH_AUDIO)
         self.ground_x_cycle_width = 24
         self.forword_speed = 2
+        # load sound effect
+        self.sound_dict = {name: mixer.Sound(sound_path) for name, sound_path in settings.AUDIO_PATHS.items()}
         # start init game
         self.bird_group = sprite.Group()
         self.pipe_groop = sprite.Group()
@@ -62,7 +59,7 @@ class GamePlay(GameManager):
                     position=Vector2(start_pipe_x_pos, pipe_pos['bottom'][-1])
                 )
             )
-        self.game_started = False
+        self.game_started = True
         self.score = 0
         self.counter = 0
 
@@ -74,7 +71,7 @@ class GamePlay(GameManager):
                 self.game_started = True
                 if not self.bird_sprite.is_dead:
                     self.bird_sprite.setFlapped()
-                    self.swoosh_audio.play()
+                    self.sound_dict['swoosh'].play()
 
     def _show_score(self, score: int, screen: surface.Surface) -> None:
         digits = list(str(score))
@@ -98,21 +95,18 @@ class GamePlay(GameManager):
         if not self.bird_sprite.is_dead:
             self.ground_pos.x = -(self.counter%self.ground_x_cycle_width)
             self._move_pipe()
-
-    def _sound_control(self) -> None:
-        if self.bird_sprite.is_dead:
-            self.hit_sound.play()
-            self.die_sound.play()
+        elif self.bird_sprite.is_dead and self.game_started:
+            self.game_started = False
+            self.sound_dict['hit'].play()
+            self.sound_dict['die'].play()
 
     def update(self, dt: float) -> None:
         if not self.game_started:
             return
-        self.counter += 1
+        self.counter += self.forword_speed
         self.bird_group.update(dt=dt, boundary=[0, self.ground_pos.y])
-        if not self.bird_sprite.is_dead:
-            self.pipe_groop.update(dt=dt, boundary=[0, self.ground_pos.y])
-            self._move_forword()
-            self._sound_control()
+        self.pipe_groop.update(dt=dt, boundary=[0, self.ground_pos.y])
+        self._move_forword()
 
     def draw(self, screen: surface.Surface) -> None:
         screen.blit(self.background_image, (0, 0))

@@ -21,3 +21,11 @@ HIT_AUDIO = os.path.join(PRO_PATH, 'content/audios/hit.wav')
 POINT_AUDIO = os.path.join(PRO_PATH, 'content/audios/point.wav')
 SWOOSH_AUDIO = os.path.join(PRO_PATH, 'content/audios/swoosh.wav')
 WING_AUDIO = os.path.join(PRO_PATH, 'content/audios/wing.wav')
+
+AUDIO_PATHS = {
+    'die': os.path.join(PRO_PATH, 'content/audios/die.wav'),
+    'hit': os.path.join(PRO_PATH, 'content/audios/hit.wav'),
+    'point': os.path.join(PRO_PATH, 'content/audios/point.wav'),
+    'swoosh': os.path.join(PRO_PATH, 'content/audios/swoosh.wav'),
+    'wing': os.path.join(PRO_PATH, 'content/audios/wing.wav')
+}

@@ -5,9 +5,9 @@ import pygame
 from pygame import event, surface
 
 from . import settings
+from .lib import GameManager
 from .game_start import GameStart
 from .game_play import GamePlay
-from .lib import GameManager
 
 class MainGame:
     def __init__(self) -> None:

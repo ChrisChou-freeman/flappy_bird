@@ -2,21 +2,19 @@ from typing import Dict, List
 
 from pygame import sprite, mask, Vector2, surface
 
+from ..lib import SpriteAnimation
 
-class Bird(sprite.Sprite):
+class Bird(SpriteAnimation):
     def __init__(self, img: surface.Surface, metadata: Dict[str, str], position: Vector2):
-        super().__init__()
+        super().__init__(img, position, 34)
         self.metadata = metadata
-        self.image = img
-        self.rect = self.image.get_rect()
-        self.mask = mask.from_surface(self.image)
-        self.rect.left, self.rect.top = int(position.x), int(position.y)
         self.is_flapped = False
         self.up_speed = 9.0
         self.down_speed = 0.0
         self.is_dead = False
 
     def update(self, *_, **kwargs) -> None:
+        self.play()
         time_passed: float = kwargs['dt']
         boundary: List[int] = kwargs['boundary']
         if self.is_flapped:
