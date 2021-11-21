@@ -14,6 +14,12 @@ class Pipe(sprite.Sprite):
         self.rect.left, self.rect.top = int(position.x), int(position.y)
         self.used_for_sore = False
 
+    def update(self, *_, **__) -> None:
+        if self.rect is None:
+            return
+        if self.rect.right < 0:
+            self.kill()
+
     @staticmethod
     def random_pipe(image: surface.Surface) -> Dict[str, Vector2]:
         base_y = 0.79 * settings.SCREEN_HEIGHT

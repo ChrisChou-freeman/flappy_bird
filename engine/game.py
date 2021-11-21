@@ -23,7 +23,6 @@ class MainGame:
             'game_start': GameStart,
             'game_play': GamePlay
         }
-        self.score = 0
         self.game_manager: Optional[GameManager] = None
 
     def _create_screen(self) -> surface.Surface:
@@ -35,7 +34,6 @@ class MainGame:
         if key_event.type == pygame.QUIT \
                 or (key_event.type == pygame.KEYDOWN and key_event.key == pygame.K_ESCAPE):
                 self._quit()
-                print('0')
         if self.game_manager is not None:
             self.game_manager.handle_input(key_event)
 

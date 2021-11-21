@@ -1,22 +1,10 @@
-from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from typing import Dict
 
 from pygame import surface, event
 
-@dataclass
-class Position:
-    x: int
-    y: int
-
-@dataclass
-class PositionF:
-    x: float
-    y: float
-
-
 class GameManager(ABC):
-    def __init__(self, metadata: Dict[str, str]):
+    def __init__(self, metadata: Dict[str, str]) -> None:
         self.metadata = metadata
 
     @abstractmethod

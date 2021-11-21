@@ -9,12 +9,14 @@ class Bird(SpriteAnimation):
         super().__init__(img, position, 34)
         self.metadata = metadata
         self.is_flapped = False
-        self.up_speed = 9.0
+        self.up_speed_limit = 4.0
+        self.up_speed = self.up_speed_limit
         self.down_speed = 0.0
         self.is_dead = False
 
     def update(self, *_, **kwargs) -> None:
-        self.play()
+        if not self.is_dead:
+            self.play()
         time_passed: float = kwargs['dt']
         boundary: List[int] = kwargs['boundary']
         if self.is_flapped:
@@ -26,7 +28,7 @@ class Bird(SpriteAnimation):
                 self.up_speed = 9
                 self.down_speed = 0
         else:
-            self.down_speed += 15 * time_passed
+            self.down_speed += 8 * time_passed
             if self.rect is not None:
                 self.rect.bottom += int(self.down_speed)
         if self.rect is not None:
@@ -43,7 +45,7 @@ class Bird(SpriteAnimation):
 
     def setFlapped(self) -> None:
         if self.is_flapped:
-            self.up_speed = max(12, self.up_speed + 1)
+            self.up_speed = max(self.up_speed_limit, self.up_speed + 1)
         else:
             self.is_flapped = True
 
