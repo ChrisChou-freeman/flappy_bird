@@ -7,6 +7,7 @@ SCREEN_WIDTH = 288
 SCREEN_HEIGHT = 512
 PIPE_GAP_SIZE = 110
 PRO_PATH = os.path.dirname(os.path.abspath(__file__))
+ICON_IMG_PATH = os.path.join(PRO_PATH, 'content/images/game.png')
 NUMBER_IMG_PATH = os.path.join(PRO_PATH, 'content/images/numbers/')
 BIRD_IMG_PATHS = os.path.join(PRO_PATH, 'content/images/birds/')
 BACKGROUND_IMG_PATH = os.path.join(PRO_PATH, 'content/images/background/')

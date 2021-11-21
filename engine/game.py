@@ -2,7 +2,7 @@ import sys
 from typing import Optional, Type, Dict
 
 import pygame
-from pygame import event, surface
+from pygame import event, surface, image
 
 from . import settings
 from .lib import GameManager
@@ -28,6 +28,7 @@ class MainGame:
     def _create_screen(self) -> surface.Surface:
         screen = pygame.display.set_mode((settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT))
         pygame.display.set_caption('Flappy Bird')
+        pygame.display.set_icon(image.load(settings.ICON_IMG_PATH).convert_alpha())
         return screen
 
     def _handle_input(self, key_event: event.Event) -> None:
