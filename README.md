@@ -1,1 +1,3 @@
-# not finish yet
+# flappy bird made with modern python
+
+not finish yet
