@@ -1,4 +1,4 @@
-from pygame import surface, Vector2, sprite, mask, rect
+from pygame import surface, Vector2, sprite, mask, rect, transform
 
 class SpriteAnimation(sprite.Sprite):
     def __init__(self, image_sheet: surface.Surface, position: Vector2, fram_with: int, loop: bool=True) -> None:
@@ -11,6 +11,7 @@ class SpriteAnimation(sprite.Sprite):
         self.image_sheet = image_sheet
         self._fram_with = fram_with
         self._fram_number = self.image_sheet.get_width() / fram_with
+        self.rotate_value = 0.0
         self.image = self._get_curren_fram()
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = int(position.x), int(position.y)
@@ -25,15 +26,14 @@ class SpriteAnimation(sprite.Sprite):
         )
 
     def _get_curren_fram(self) -> surface.Surface:
-        return self.image_sheet.subsurface(self._get_curren_fram_area())
+        return transform.rotate(self.image_sheet.subsurface(self._get_curren_fram_area()), self.rotate_value)
 
     def play(self) -> None:
         self._counter += 1
         if self._counter % self._frequency == 0:
             if self._current_fram < self._fram_number - 1:
                 self._current_fram += 1
-                self.image = self._get_curren_fram()
             elif self._current_fram == self._fram_number - 1 and self._loop:
                 self._current_fram = 1
-                self.image = self._get_curren_fram()
+        self.image = self._get_curren_fram()
 
