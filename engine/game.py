@@ -12,7 +12,6 @@ from .game_play import GamePlay
 class MainGame:
     def __init__(self) -> None:
         pygame.init()
-        pygame.mixer.init()
         self.screen = self._create_screen()
         self.game_metadata = {
             'bird': '',
