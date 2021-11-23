@@ -40,7 +40,7 @@ class Bird(SpriteAnimation):
                 self.down_speed = 0
         else:
             if self.rotate_value > self.rotate_limit*-1:
-                self.rotate_value -= 70 * time_passed
+                self.rotate_value -= 60 * time_passed
             self.down_speed += 8 * time_passed
             if self.rect is not None:
                 self.rect.bottom += int(self.down_speed)
