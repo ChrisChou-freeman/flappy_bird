@@ -15,7 +15,7 @@ class SpriteAnimation(sprite.Sprite):
         self.image = self._get_curren_fram()
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = int(position.x), int(position.y)
-        self.mask = mask.from_surface(image_sheet)
+        # self.mask = mask.from_surface(image_sheet)
 
     def _get_curren_fram_area(self) -> rect.Rect:
         return rect.Rect(
