@@ -2,7 +2,7 @@
 
 ### requires
 ```txt
-pyhton >= 3.9
+pyhton >= 3.10
 pygame >= 2.1
 ```
 ### play key
