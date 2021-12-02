@@ -1,4 +1,4 @@
-from pygame import surface, Vector2, sprite, mask, rect, transform
+from pygame import surface, Vector2, sprite, rect, transform
 
 class SpriteAnimation(sprite.Sprite):
     def __init__(self, image_sheet: surface.Surface, position: Vector2, fram_with: int, loop: bool=True) -> None:

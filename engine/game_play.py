@@ -1,5 +1,4 @@
 import os
-from typing import Dict, List
 
 import pygame
 from pygame import surface, event, image, sprite, Vector2, mixer
@@ -9,7 +8,7 @@ from .sprites import Bird, Pipe
 from . import settings
 
 class GamePlay(GameManager):
-    def __init__(self, metadata: Dict[str, str]) -> None:
+    def __init__(self, metadata: dict[str, str]) -> None:
         super().__init__(metadata)
         self.metadata = metadata
         # load images
@@ -31,7 +30,7 @@ class GamePlay(GameManager):
         # start init game
         self.bird_group = sprite.Group()
         self.pipe_groop = sprite.Group()
-        self.scored_pipe: List[sprite.Sprite]
+        self.scored_pipe: list[sprite.Sprite]
         self.game_started: bool
         self.score: float
         self.counter: int

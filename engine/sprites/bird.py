@@ -1,15 +1,12 @@
-from typing import Dict, List, Optional
-# import copy
-
 from pygame import Vector2, surface, transform
 
 from .sprite_animation import SpriteAnimation
 
 class Bird(SpriteAnimation):
-    def __init__(self, img: surface.Surface, metadata: Dict[str, str], position: Vector2) -> None:
+    def __init__(self, img: surface.Surface, metadata: dict[str, str], position: Vector2) -> None:
         super().__init__(img, position, 34)
         self.metadata = metadata
-        self.normal_bird_img: Optional[surface.Surface] = None
+        self.normal_bird_img: surface.Surface|None = None
         self.is_flapped = False
         self.up_speed_limit = 4.0
         self.up_speed = self.up_speed_limit
@@ -20,7 +17,7 @@ class Bird(SpriteAnimation):
 
     def update(self, *_, **kwargs) -> None:
         time_passed: float = kwargs['dt']
-        boundary: List[int] = kwargs['boundary']
+        boundary: list[int] = kwargs['boundary']
 
         if self.is_dead:
             if self.image is not None and not self.death_rotated:

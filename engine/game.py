@@ -1,5 +1,4 @@
 import sys
-from typing import Optional, Type, Dict
 
 import pygame
 from pygame import event, surface, image
@@ -18,11 +17,11 @@ class MainGame:
             'day_night': '',
             'game_mode': 'game_start'
         }
-        self.game_mode: Dict[str, Type[GameManager]] = {
+        self.game_mode: dict[str, type[GameManager]] = {
             'game_start': GameStart,
             'game_play': GamePlay
         }
-        self.game_manager: Optional[GameManager] = None
+        self.game_manager: GameManager|None = None
 
     def _create_screen(self) -> surface.Surface:
         screen = pygame.display.set_mode((settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT))

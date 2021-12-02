@@ -1,6 +1,5 @@
 import os
 import random
-from typing import Dict
 
 import pygame
 from pygame import surface, event, Vector2
@@ -9,7 +8,7 @@ from .lib import listdir_clean, GameManager, Animation
 from . import settings
 
 class GameStart(GameManager):
-    def __init__(self, metadata: Dict[str, str]) -> None:
+    def __init__(self, metadata: dict[str, str]) -> None:
         super().__init__(metadata)
         self.bird: str = random.choice(listdir_clean(settings.BIRD_IMG_PATHS))
         self.day_night: str = random.choice(listdir_clean(settings.BACKGROUND_IMG_PATH))

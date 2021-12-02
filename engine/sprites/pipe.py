@@ -1,5 +1,4 @@
 import random
-from typing import Dict
 
 from pygame import sprite, surface, mask, Vector2
 
@@ -21,7 +20,7 @@ class Pipe(sprite.Sprite):
             self.kill()
 
     @staticmethod
-    def random_pipe(image: surface.Surface) -> Dict[str, Vector2]:
+    def random_pipe(image: surface.Surface) -> dict[str, Vector2]:
         base_y = 0.79 * settings.SCREEN_HEIGHT
         up_y = int(base_y * 0.2) + random.randrange(0, int(base_y * 0.6 - settings.PIPE_GAP_SIZE))
         pip_poz = {
